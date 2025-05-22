@@ -50,6 +50,9 @@ const ContainerTexto = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: 375px) {
+        width: 100vw;
+    }
 `;
 
 const Texto = styled.p`
@@ -63,15 +66,24 @@ const ContainerFilmes = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
+
+    @media (max-width: 375px) {
+        flex-direction: column; 
+    }
 `;
 
 const Filme = styled(Link)`
     width: 145px;
     height: 210px;
+    
+   
 
     img {
         width: 145px;
         height: 210px;
         object-fit: cover;
+        border-radius:8px;
+        
+        
     }
 `;

@@ -52,7 +52,7 @@ export default function Assentos({ setTudo }) {
         })
             .then(() => {
                 setTudo(prevState => ({
-                    ...prevState, // Mantém todas as propriedades existentes
+                    ...prevState,
                     assentos: selecionados,
                     nomeComprador: nome,
                     cpf: cpf
@@ -71,7 +71,7 @@ export default function Assentos({ setTudo }) {
 
     return (
         <Corpo>
-            <Titulo>Selecione os assentos</Titulo>
+            <Titulo>Selecione o(s) assento(s)</Titulo>
 
             <GradeAssentos>
                 {linhas.map((linha, i) => (
@@ -89,31 +89,31 @@ export default function Assentos({ setTudo }) {
                     </Linha>
                 ))}
             </GradeAssentos>
-
+            <Barra></Barra>
             <DadosReserva>
                 <Campo>
-                    <label>Nome:</label>
+                    <label>Nome do comprador(a)</label>
                     <input
                         type="text"
                         value={nome}
                         onChange={atualizarNome}
-                        placeholder="Seu nome completo"
+                        placeholder="Digite seu nome..."
                     />
                 </Campo>
                 <Campo>
-                    <label>CPF:</label>
+                    <label>CPF do comprador(a):</label>
                     <input
                         type="text"
                         value={cpf}
                         onChange={atualizarCpf}
-                        placeholder="Somente números"
+                        placeholder="Digite seu CPF..."
                         maxLength="11"
                     />
                 </Campo>
             </DadosReserva>
 
             <Botao onClick={fazerReserva}>
-                Reservar assento(s)
+                <Texto>Reservar assento(s)</Texto>
             </Botao>
         </Corpo>
     );
@@ -157,11 +157,11 @@ const Assento = styled.div`
     font-size: 12px;
     cursor: pointer;
     background: ${({ disponivel, selecionado }) =>
-            !disponivel ? '#666' :
-                    selecionado ? '#FFD700' : '#4CAF50'};
-    border: 1px solid ${({ disponivel, selecionado }) =>
-            !disponivel ? '#333' :
-                    selecionado ? '#FFA500' : '#2E7D32'};
+            !disponivel ? '#2b2d36' :
+                    selecionado ? '#fadbc5' : '#9bd899'};
+    border: 2px solid ${({ disponivel, selecionado }) =>
+            !disponivel ? '#2b2d36' :
+                    selecionado ? '#ee897f' : '#9bd899'};
 `;
 
 const DadosReserva = styled.div`
@@ -185,22 +185,43 @@ const Campo = styled.div`
 
     input {
         padding: 10px;
-        border-radius: 4px;
+        border-radius: 8px;
         border: 1px solid #ccc;
     }
 `;
 
 const Botao = styled.button`
     padding: 12px 30px;
-    background: #E8833A;
-    color: white;
+    background: #ee897f;
+    width:338px;
+    color: black;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     font-family: 'Sarala', sans-serif;
     font-size: 16px;
     cursor: pointer;
+    margin-top:15px;
 
     &:hover {
         background: #D97634;
     }
-`;
+
+    @media (max-width: 375px) {
+        width: 90vw;
+    }`;
+
+const Texto = styled.p`
+    font-family: 'Sarala', sans-serif;
+    font-weight:700;
+    
+`
+
+const Barra = styled.div`
+    background-color:#4e5a65;
+    height:1px;
+    width:302px;
+    margin-bottom:30px;
+    @media (max-width: 375px) {
+        width: 80vw;
+    }
+`

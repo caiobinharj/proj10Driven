@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-export default function Sessoes({ tudo, setTudo }) {
+export default function Sessoes({ setTudo }) {
     const { idFilme } = useParams();
     const [sessoes, setSessoes] = useState([]);
 
@@ -25,11 +25,13 @@ export default function Sessoes({ tudo, setTudo }) {
             ...prev,
             idSessao: sessionId,
             sessao: {
+                ...prev.sessao,
                 dia: day,
                 hora: time
             }
         }));
     };
+
 
     return (
         <Corpo>
@@ -41,8 +43,9 @@ export default function Sessoes({ tudo, setTudo }) {
                 {sessoes.map((dia) => (
                     <ContainerDia key={dia.id}>
                         <Dia>
-                            {dia.weekday} - {dia.date}
+                            {dia.weekday}, {dia.date}
                         </Dia>
+                        <Barra></Barra>
                         <Horarios>
                             {dia.showtimes.map((sessao) => (
                                 <Link
@@ -68,7 +71,6 @@ export default function Sessoes({ tudo, setTudo }) {
     );
 }
 
-// Estilos (mantidos os mesmos com pequenos ajustes)
 const Corpo = styled.div`
     background-color: #212226;
     min-height: 100vh;
@@ -89,11 +91,24 @@ const Texto = styled.p`
 `;
 
 const CardapioSessoes = styled.div`
-    padding: 0 24px;
+    
 `;
 
 const ContainerDia = styled.div`
     margin-bottom: 30px;
+    border-radius:8px;
+
+    background-color: #2b2d36;
+    width:338px;
+    height:149px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    @media (max-width: 375px) {
+        width: 99vw;
+    }
 `;
 
 const Dia = styled.p`
@@ -105,16 +120,16 @@ const Dia = styled.p`
 
 const Horarios = styled.div`
     display: flex;
-    gap: 8px;
+    gap: 20px;
 `;
 
 const SessaoButton = styled.button`
     width: 83px;
     height: 43px;
-    background: #E8833A;
-    border-radius: 3px;
-    border: none;
-    color: white;
+    border: 2px solid #EE897F;
+    border-radius: 8px;
+    background-color: #2b2d36;
+    color: #ee897f;
     font-family: 'Sarala', sans-serif;
     font-size: 18px;
     cursor: pointer;
@@ -122,3 +137,12 @@ const SessaoButton = styled.button`
         filter: brightness(0.9);
     }
 `;
+
+const Barra = styled.div`
+    background-color:#4e5a65;
+    height:1px;
+    width:302px;
+    @media (max-width: 375px) {
+        width: 80vw;
+    }
+`
